@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create note</title>
+    <style>
+        .my-input1 {
+            width:350px;
+        }
+        body {
+            background: linear-gradient(lightgreen, lightgreen);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-weight: normal;
+        }
+        .b1 {
+            text-decoration: none;
+            display: inline-block;
+            padding: 20px 30px;
+            margin: 10px 20px;
+            position: center;
+            color: black;
+            border: 1px solid black;
+            background: none;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .b1:hover {
+            background: linear-gradient(green, green);
+            /*box-shadow: 0 15px 20px red;*/
+            color: white;
+            /*transform: translateY(-7px);*/
+        }
+    </style>
+</head>
+<body style="background-color: #fdefc7">
+<form action="#" th:action="@{/note-create}" th:object="${note}" method="post">
+    <label for="title">Name of participant</label>
+    <input type="text" th:field="*{title}" id="title" placeholder="Name of participant">
+    <label for="content">Nation</label>
+    <input type="text" class="my-input1" th:field="*{content}" id="content" placeholder="Nation">
+    <label for="date">Total Score</label>
+    <input type="text" th:field="*{date}" id="date" placeholder="Total Score">
+    <input type="submit" class="b1"  value="Add participant">
+</form>
+</body>
+</html>

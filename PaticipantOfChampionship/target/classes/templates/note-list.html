@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+    <style type="text/css">
+        body {
+
+            background: linear-gradient(lightgreen, lightgreen);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-weight: normal;
+        }
+
+        table {
+            width: 1300px; /* Ширина таблицы */
+            border-collapse: collapse;
+            margin: auto; /* Выравниваем таблицу по центру окна  */
+        }
+
+        th {
+            text-align: center;
+        }
+        td, th {
+            border: 1px solid #000000;
+            padding: 4px;
+            text-align: center; /* Выравниваем текст по центру ячейки */
+        }
+        .col1 {
+            width: 200px; /* Ширина ячейки */
+        }
+
+        /* текст кнопки*/
+        a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 20px 30px;
+            /*margin: 10px 20px;*/
+            margin: auto;
+            position: center;
+            color: black;
+            border: 1px solid black;
+            background: none;
+            font-weight: 600;
+            /*font-family: 'Montserrat', sans-serif;*/
+            font-family: Geneva, Arial, Helvetica, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        a:before, a:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            box-sizing: border-box;
+        }
+        a:before {
+            bottom: 0;
+            left: 0;
+            border-left: 1px solid white;
+            border-top: 1px solid white;
+            transition: 0s ease opacity .8s, .2s ease width .4s, .2s ease height .6s;
+        }
+        a:after {
+            top: 0;
+            right: 0;
+            border-right: 1px solid white;
+            border-bottom: 1px solid white;
+            transition: 0s ease opacity .4s, .2s ease width, .2s ease height .2s;
+        }
+        a:hover:before,
+        a:hover:after {
+            height: 100%;
+            width: 100%;
+            opacity: 1;
+
+        }
+        a:hover:before {
+            transition: 0s ease opacity 0s, .2s ease height, .2s ease width .2s;
+        }
+        a:hover:after {
+            transition: 0s ease opacity .4s, .2s ease height .4s, .2s ease width .6s;
+        }
+        a:hover {
+            background: linear-gradient(green, green);
+            /*box-shadow: 0 15px 20px red;*/
+            color: white;
+            /*transform: translateY(-7px);*/
+        }
+
+    </style>
+</head>
+<body style="background-color: #fdefc7">
+<div th:switch="${notes}">
+    <h2 th:case="null">No  found!</h2>
+    <div th:case="*">
+        <h2 align="center">List of participant</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name:</th>
+                <th>Nation:</th>
+                <th>Score:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="note : ${notes}">
+                <td th:text="${note.title}"></td>
+                <td th:text="${note.content}"></td>
+                <td th:text="${note.date}"></td>
+                <td><a th:href="@{note-update/{id}(id=${note.id})}">Edit</a></td>
+                <td><a th:href="@{note-delete/{id}(id=${note.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/note-create">Add participant</a></p>
+</div>
+</body>
+</html>
